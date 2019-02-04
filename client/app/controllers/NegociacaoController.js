@@ -1,4 +1,4 @@
-class NegociacaoController{
+ class NegociacaoController{
 
 
 constructor(){
@@ -14,16 +14,15 @@ constructor(){
     adciona(event){
         event.preventDefault();
 
-        let data = new Date(...this._inputData.value.split('-'));
-
         let negociacao = new Negociacao(
-            data,
+            DateConverter.toDate(this._inputData.value),
             parseInt(this._inputQuantidade),
             parseFloat(this._inputValor)
         )
-
-
-        console.log(negociacao);
+        
+        let diaMesAno = DateConverter.toString(negociacao.data);
+       
+        console.log(diaMesAno);
         
     }
 }

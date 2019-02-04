@@ -4,7 +4,7 @@ class Negociacao {
 
         Object.assign(this, {_quantidade : quantidade,_valor : valor
             })
-        this._data = new Date(data.getTime());
+        this._data = new Date(_data.getTime());
 
         Object.freeze(this);
     }
@@ -15,10 +15,6 @@ class Negociacao {
 
     get data(){
         return this._data;
-    }
-
-    setData(){
-        return new Date (this._data.getTime());
     }
 
     get quanitade(){
