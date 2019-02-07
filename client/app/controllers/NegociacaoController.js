@@ -2,25 +2,22 @@
 
 
 constructor(){
-    let $ = document.querySelector.bind(document);
+    const $ = document.querySelector.bind(document);
     this._inputData = $('#data');
     this._inputQuantidade = $('#quantidade');
     this._inputValor = $('#valor');
-    this._negociacoes =	new	Negociacoes();
+    
+    // this._negociacoes =	new	Negociacoes((model) => {
+    //     this._negociacoesView.update(model);
+    // });
     this._negociacoesView = new NegociacoesView('#negociacoes');
     this._negociacoesView.update(this._negociacoes);
+    
     this._mensagem = new Mensagem();
     this._mensagemView = new MensagemView('#mensagemView');
     this._mensagemView.update(this._mensagem);
+
 }
-
-    _limpaFormulario(){
-        this._inputData.value = '';
-        this._inputQuantidade.value = 1;
-        this._inputValor.value = 0.0;
-        this._inputData.focus();
-    }
-
 
     adciona(event){
         event.preventDefault();
@@ -32,11 +29,24 @@ constructor(){
 
     }
 
+    _limpaFormulario(){
+        this._inputData.value = '';
+        this._inputQuantidade.value = 1;
+        this._inputValor.value = 0.0;
+        this._inputData.focus();
+    }
+
     _criaNegociacao(){
         return new Negociacao(
             DateConverter.toDate(this._inputData.value),
             parseInt(this._inputQuantidade.value),
             parseFloat(this._inputValor.value),
         );    
+    }
+
+    apaga(){
+        this._negociacoes.esvazia();
+        this._mensagem.texto = 'Negociacoes apagadas com sucesso';
+        this._mensagemView.update(this._mensagem);       
     }
 }
